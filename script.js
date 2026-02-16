@@ -1,4 +1,4 @@
-const subtitle = "Liora's story is one of heartbreak, rejection, and abuse—but also of extraordinary courage, community, and the right to live authentically.";
+const subtitle = "Two story-driven journeys unfold here: one fictional, one autobiographical—both carrying heartbreak, courage, and the right to be fully seen.";
 const typedLine = document.getElementById("typedLine");
 const progress = document.getElementById("readProgress");
 const revealItems = document.querySelectorAll(".reveal");
@@ -13,7 +13,6 @@ const readerStatus = document.getElementById("readerStatus");
 const storyRoot = document.getElementById("storyRoot");
 
 let index = 0;
-let readingQueue = [];
 let isStopped = false;
 let voices = [];
 
@@ -28,7 +27,7 @@ function typeText() {
   if (index <= subtitle.length) {
     typedLine.textContent = subtitle.slice(0, index);
     index += 1;
-    setTimeout(typeText, 22);
+    setTimeout(typeText, 20);
   }
 }
 
@@ -52,21 +51,21 @@ const observer = new IntersectionObserver(
 );
 
 function getStorySegments() {
-  const segmentNodes = storyRoot.querySelectorAll(".chapter, .timeline");
+  const segmentNodes = storyRoot.querySelectorAll(".story-group, .chapter, .timeline");
   const segments = [];
 
   segmentNodes.forEach((node) => {
     const emotion = node.dataset.emotion || "steady";
     const title = node.querySelector("h2")?.textContent?.trim();
     if (title) {
-      segments.push({ text: title, emotion, isHeading: true });
+      segments.push({ text: title, emotion });
     }
 
     const blocks = node.querySelectorAll("p, li");
     blocks.forEach((block) => {
       const text = block.textContent.replace(/\s+/g, " ").trim();
       if (text.length > 0) {
-        segments.push({ text, emotion, isHeading: false });
+        segments.push({ text, emotion });
       }
     });
   });
@@ -112,12 +111,12 @@ function createUtterance(segment, idx, total) {
 
   utterance.onend = () => {
     if (idx === total - 1 && !isStopped) {
-      readerStatus.textContent = "Finished reading the full story.";
+      readerStatus.textContent = "Finished reading the selected stories.";
     }
   };
 
   utterance.onerror = () => {
-    readerStatus.textContent = "Speech reader hit an error. You can try another voice.";
+    readerStatus.textContent = "Speech reader hit an error. Please try another voice.";
   };
 
   return utterance;
@@ -133,17 +132,15 @@ function startStoryReading() {
   isStopped = false;
   const segments = getStorySegments();
 
-  readingQueue = segments.map((segment, idx) =>
-    createUtterance(segment, idx, segments.length)
-  );
-
-  if (readingQueue.length === 0) {
+  if (segments.length === 0) {
     readerStatus.textContent = "No readable story text found.";
     return;
   }
 
   readerStatus.textContent = "Starting narration…";
-  readingQueue.forEach((utterance) => window.speechSynthesis.speak(utterance));
+  segments.forEach((segment, idx) => {
+    window.speechSynthesis.speak(createUtterance(segment, idx, segments.length));
+  });
 }
 
 function stopStoryReading() {

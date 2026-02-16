@@ -5,9 +5,6 @@
   --muted: #c7c2e8;
   --accent: #72e2ff;
   --rose: #ff8bb8;
-  --violet: #aa8dff;
-  --danger: #ff6d80;
-  --good: #99f0a0;
   --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -43,7 +40,7 @@ body {
 
 header {
   position: relative;
-  min-height: 92vh;
+  min-height: 85vh;
   display: grid;
   align-items: center;
   padding: 4rem 1.4rem 2rem;
@@ -86,17 +83,17 @@ header::after {
 h1 {
   font-family: "Georgia", "Times New Roman", serif;
   line-height: 1.16;
-  font-size: clamp(2.1rem, 5vw, 4.15rem);
-  max-width: 15ch;
+  font-size: clamp(2rem, 4.2vw, 3.8rem);
+  max-width: 18ch;
   text-wrap: balance;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   margin-bottom: 1.2rem;
 }
 
 .subtitle {
-  max-width: 60ch;
+  max-width: 66ch;
   color: #f0ebff;
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   background: rgba(10, 10, 20, 0.38);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 14px;
@@ -114,8 +111,48 @@ h1 {
   font-size: 0.85rem;
 }
 
-.audio-reader {
+.story-nav,
+.audio-reader,
+.container,
+footer {
   width: min(1100px, 92%);
+}
+
+.story-nav {
+  margin: 1.1rem auto 0;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--shadow);
+}
+
+.story-nav-title {
+  color: #ebddff;
+  margin-bottom: 0.55rem;
+  font-weight: 600;
+}
+
+.story-nav-links {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.story-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.story-nav a:hover {
+  border-color: var(--accent);
+  color: #d6f8ff;
+}
+
+.audio-reader {
   margin: 1.2rem auto 0;
   padding: 1rem;
   border-radius: 16px;
@@ -139,10 +176,21 @@ h1 {
 .audio-controls select,
 .audio-controls input {
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
   color: var(--text);
   padding: 0.5rem 0.6rem;
+}
+
+.audio-controls select {
+  background-color: #f8f8ff;
+  color: #171931;
+  font-weight: 600;
+}
+
+.audio-controls select option {
+  background: #ffffff;
+  color: #111827;
 }
 
 .audio-controls button {
@@ -168,10 +216,33 @@ h1 {
 }
 
 .container {
-  width: min(1100px, 92%);
   margin: 2.3rem auto 5rem;
   display: grid;
   gap: 1.4rem;
+}
+
+.story-group {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+}
+
+.story-title {
+  margin-bottom: 0.25rem;
+}
+
+.story-author {
+  color: #f4c7de;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.story-intro {
+  color: #ddd7f9;
 }
 
 .chapter {
@@ -188,7 +259,8 @@ h1 {
 }
 
 .chapter.visible,
-.timeline.visible {
+.timeline.visible,
+.story-group.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -215,7 +287,7 @@ h1 {
 
 h2 {
   font-family: "Georgia", serif;
-  font-size: clamp(1.45rem, 2.8vw, 2.1rem);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
   margin-bottom: 0.5rem;
 }
 
@@ -243,10 +315,6 @@ p + p {
   box-shadow: var(--shadow);
 }
 
-.timeline h2 {
-  margin-bottom: 0.9rem;
-}
-
 .timeline ul {
   list-style: none;
   display: grid;
@@ -271,7 +339,6 @@ p + p {
 }
 
 footer {
-  width: min(1100px, 92%);
   margin: 0 auto 3rem;
   text-align: center;
   color: #ddd9f6;
@@ -287,6 +354,10 @@ footer {
 }
 
 @media (min-width: 850px) {
+  .story-nav-links {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .audio-reader {
     grid-template-columns: 1fr 1.2fr;
     align-items: start;
