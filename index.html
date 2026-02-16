@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Still Blooming — A Story of Survival and Joy</title>
+  <style>
+    :root {
+      --bg: #0f1020;
+      --card: #171931;
+      --text: #f5f4ff;
+      --muted: #c7c2e8;
+      --accent: #72e2ff;
+      --rose: #ff8bb8;
+      --violet: #aa8dff;
+      --danger: #ff6d80;
+      --good: #99f0a0;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at 15% 0%, #261f49 0, var(--bg) 55%);
+      color: var(--text);
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .progress {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--rose), var(--accent));
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 30;
+    }
+
+    header {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 4rem 1.4rem 2rem;
+      isolation: isolate;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 16, 32, 0.3), rgba(15, 16, 32, 0.8)),
+        url("https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1600&q=80") center/cover;
+      filter: saturate(0.8) brightness(0.75);
+      z-index: -2;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(255, 139, 184, 0.28), rgba(114, 226, 255, 0.2));
+      z-index: -1;
+    }
+
+    .hero {
+      width: min(1050px, 100%);
+      margin: 0 auto;
+      padding: clamp(1rem, 2vw, 2rem);
+    }
+
+    .kicker {
+      font-size: 0.84rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #eedcff;
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      font-family: "Georgia", "Times New Roman", serif;
+      line-height: 1.16;
+      font-size: clamp(2.1rem, 5vw, 4.15rem);
+      max-width: 15ch;
+      text-wrap: balance;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1.2rem;
+    }
+
+    .subtitle {
+      max-width: 60ch;
+      color: #f0ebff;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      background: rgba(10, 10, 20, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 0.9rem 1.1rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .trigger {
+      margin-top: 1.2rem;
+      display: inline-block;
+      color: var(--muted);
+      border: 1px dashed rgba(255, 255, 255, 0.38);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 2.3rem auto 5rem;
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .chapter {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .chapter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .image {
+      min-height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.65));
+      z-index: -1;
+    }
+
+    .chapter-content {
+      padding: 1.2rem 1.2rem 1.4rem;
+    }
+
+    h2 {
+      font-family: "Georgia", serif;
+      font-size: clamp(1.45rem, 2.8vw, 2.1rem);
+      margin-bottom: 0.5rem;
+    }
+
+    p + p {
+      margin-top: 0.95rem;
+    }
+
+    .quote {
+      margin-top: 1rem;
+      border-left: 4px solid var(--rose);
+      padding: 0.6rem 0.9rem;
+      background: rgba(255, 139, 184, 0.08);
+      color: #ffeef6;
+      border-radius: 8px;
+    }
+
+    .timeline {
+      padding: 1.4rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline h2 {
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline ul {
+      list-style: none;
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .timeline li {
+      padding: 0.7rem 0.85rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .timeline strong {
+      color: var(--accent);
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #d4d0ee;
+    }
+
+    footer {
+      width: min(1100px, 92%);
+      margin: 0 auto 3rem;
+      text-align: center;
+      color: #ddd9f6;
+      opacity: 0.95;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      padding-top: 1.2rem;
+    }
+
+    .support {
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      color: #d0f7d5;
+    }
+
+    @media (min-width: 850px) {
+      .chapter {
+        grid-template-columns: 1fr 1.1fr;
+      }
+
+      .chapter.reverse {
+        grid-template-columns: 1.1fr 1fr;
+      }
+
+      .chapter.reverse .image {
+        order: 2;
+      }
+
+      .chapter.reverse .chapter-content {
+        order: 1;
+      }
+
+      .chapter-content {
+        padding: 1.6rem 1.7rem 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="readProgress" aria-hidden="true"></div>
+
+  <header>
+    <div class="hero">
+      <p class="kicker">A Fictional Story of Survival</p>
+      <h1>Still Blooming: The Long Way Home to Herself</h1>
+      <p class="subtitle" id="typedLine"></p>
+      <span class="trigger">Content note: this story includes rejection, emotional abuse, and bullying.</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="chapter reveal">
+      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="chapter-content">
+        <h2>Chapter 1 — The Name She Whispered in the Dark</h2>
+        <p>Long before anyone else knew, Liora had already met herself. She found that version in mirrors she covered with steam, in notebook margins crowded with hearts and half-written poems, in the brief peace she felt when she said, very softly, <em>"I am your daughter."</em></p>
+        <p>At home, silence was treated like obedience and difference like a threat. Her parents spoke of "normal" like it was a locked door and only certain children got the key. Liora learned how to lower her voice, hide her gestures, and fold herself so tightly that even her laughter sounded borrowed.</p>
+        <p class="quote">"Some days, pretending felt safer than breathing," she wrote in her diary at fourteen.</p>
+      </div>
+    </article>
+
+    <article class="chapter reveal reverse">
+      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="chapter-content">
+        <h2>Chapter 2 — Hallways, Laughter, and Bruises You Cannot Photograph</h2>
+        <p>School should have been a corridor to the future; for Liora, it became a daily trial. Whispers followed her like smoke. Boys mocked her walk. Girls repeated rumors, then apologized only when teachers looked their way. There were days when her backpack disappeared, days when slurs were scrawled on her locker, and days when she smiled through lunch because crying in public felt like handing out tickets to a show.</p>
+        <p>Even teachers who meant well often used the wrong name and told her not to "make life harder" for herself. In those small humiliations, she felt the world teaching her that pain would be her tuition fee for honesty.</p>
+        <p class="quote">She was not beaten every day, but she was made to feel breakable every day.</p>
+      </div>
+    </article>
+
+    <article class="chapter reveal">
+      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1507409613958-16eb9f9a5af5?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="chapter-content">
+        <h2>Chapter 3 — The Night Everything Cracked</h2>
+        <p>At sixteen, Liora came out to her parents at the dinner table with trembling hands and a page of carefully chosen words. Her mother cried. Her father stood, pushed back his chair, and called her a stranger in his house. He gathered her dresses from the closet, threw them into a black trash bag, and left them outside in the rain like a warning.</p>
+        <p>For months, home became a place of cold commands and emotional punishment: doors slammed, meals skipped "by accident," family photos moved so she no longer appeared in frames. The cruelty was often legal, often invisible, and always intimate.</p>
+        <p>That winter she slept in oversized hoodies, not for warmth but to disappear. Yet even then, she held one truth close: the hurt around her did not make her identity wrong. It only proved how frightened people become when asked to love what they do not understand.</p>
+      </div>
+    </article>
+
+    <article class="chapter reveal reverse">
+      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="chapter-content">
+        <h2>Chapter 4 — The First Hands That Helped Her Rise</h2>
+        <p>Support did not arrive as a miracle. It arrived as one counselor who listened. One librarian who set aside books about transgender lives. One classmate, Nadiya, who sat beside her in the cafeteria and stayed when others left. These were tiny acts to the world, but to Liora they were architecture: beams, nails, foundations.</p>
+        <p>She found an LGBTQ+ youth center two bus rides away. There, she learned new words—<em>affirmation, community, chosen family</em>—and each word felt like a window opening. She started therapy. She learned to answer cruelty with boundaries. She started documenting harassment and demanding accountability.</p>
+        <p class="quote">Resilience did not mean she never broke. It meant she learned how to heal in public without apologizing.</p>
+      </div>
+    </article>
+
+    <article class="chapter reveal">
+      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="chapter-content">
+        <h2>Chapter 5 — A Life Lived in Her Own Light</h2>
+        <p>By twenty-four, Liora had built a life that looked impossible from those high-school hallways. She graduated from college, mentored younger trans teens, and spoke at local schools about dignity and safety. Some of the people who once mocked her now sent awkward messages of apology. Some family members never changed. Others slowly did.</p>
+        <p>Her mother eventually attended a support group for parents of trans children. Months later, she showed up at Liora's apartment with a box. Inside were the dresses rescued from that rain-soaked night, washed and folded. "I don't know how to fix all the years," her mother said, voice shaking, "but I want to learn how to love you correctly."</p>
+        <p>Liora cried, not because everything was healed, but because she finally understood this: her joy did not depend on unanimous approval. She had survived rejection, humiliation, and the sharp loneliness of being unseen—and still she chose tenderness, still she chose tomorrow, still she chose herself.</p>
+      </div>
+    </article>
+
+    <section class="timeline reveal">
+      <h2>Her Journey at a Glance</h2>
+      <ul>
+        <li><strong>Age 14:</strong> Names herself privately and begins journaling.</li>
+        <li><strong>Age 16:</strong> Comes out at home and experiences severe rejection.</li>
+        <li><strong>Age 16–18:</strong> Endures peer bullying and social isolation at school.</li>
+        <li><strong>Age 17:</strong> Connects with a counselor and local LGBTQ+ youth center.</li>
+        <li><strong>Age 19:</strong> Leaves home, builds chosen family, and starts therapy consistently.</li>
+        <li><strong>Age 24:</strong> Graduates, mentors younger youth, and lives openly and safely.</li>
+      </ul>
+      <p class="note">This story is fictional, but the emotions are real for many people. If you are supporting a trans young person, affirmation and safety can change the trajectory of a life.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Still Blooming</strong> — A story about surviving what tried to erase you.</p>
+    <p class="support">If you need support, seek local LGBTQ+ organizations, trusted counselors, or crisis resources in your region.</p>
+  </footer>
+
+  <script>
+    const subtitle = "Liora's story is one of heartbreak, rejection, and abuse—but also of extraordinary courage, community, and the right to live authentically.";
+    const typedLine = document.getElementById("typedLine");
+    const progress = document.getElementById("readProgress");
+    const revealItems = document.querySelectorAll(".reveal");
+
+    let index = 0;
+    function typeText() {
+      if (index <= subtitle.length) {
+        typedLine.textContent = subtitle.slice(0, index);
+        index += 1;
+        setTimeout(typeText, 22);
+      }
+    }
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
+      progress.style.transform = `scaleX(${Math.min(Math.max(ratio, 0), 1)})`;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    typeText();
+    updateProgress();
+  </script>
+</body>
+</html>
