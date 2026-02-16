@@ -30,11 +30,19 @@
     <div class="audio-left">
       <h2>Audio Reader</h2>
       <p>
-        Prefer to listen? Use the reader below. It shifts pacing and tone through hard and hopeful moments so the narration better reflects each chapter's emotion.
+        You can now read each story separately. Pick one story below and the narrator will read only that journey.
       </p>
     </div>
     <div class="audio-controls">
-      <button id="startReading" type="button">▶ Read Story</button>
+      <label>
+        Story to read
+        <select id="storyTarget" aria-label="Story target selector">
+          <option value="still-blooming-story">Still Blooming — The Long Way Home</option>
+          <option value="journey-to-me-story">The Journey to Me — Kirstin TransGirl</option>
+          <option value="all-stories">All stories</option>
+        </select>
+      </label>
+      <button id="startReading" type="button">▶ Read Selected Story</button>
       <button id="pauseReading" type="button">⏸ Pause</button>
       <button id="resumeReading" type="button">⏵ Resume</button>
       <button id="stopReading" type="button">■ Stop</button>
@@ -51,127 +59,137 @@
   </section>
 
   <main class="container" id="storyRoot">
-    <section class="story-group reveal" id="still-blooming" data-emotion="steady">
-      <h2 class="story-title">Story One — Still Blooming: The Long Way Home to Herself</h2>
-      <p class="story-intro">Liora's life began in hiding, moved through rejection and cruelty, and unfolded toward dignity, support, and self-chosen joy.</p>
+    <section class="story-collection" id="still-blooming-story" data-story-title="Still Blooming — The Long Way Home">
+      <section class="story-group reveal" id="still-blooming" data-emotion="steady">
+        <h2 class="story-title">Story One — Still Blooming: The Long Way Home to Herself</h2>
+        <p class="story-intro">Liora's life began in hiding, moved through rejection and cruelty, and unfolded toward dignity, support, and self-chosen joy.</p>
+        <div class="story-tools">
+          <button class="story-read-btn" data-story-id="still-blooming-story" type="button">Listen to this story</button>
+        </div>
+      </section>
+
+      <article class="chapter reveal" data-emotion="gentle">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 1 — The Name She Whispered in the Dark</h2>
+          <p>Long before anyone else knew, Liora had already met herself. She found that version in mirrors she covered with steam, in notebook margins crowded with hearts and half-written poems, in the brief peace she felt when she said, very softly, <em>"I am your daughter."</em></p>
+          <p>At home, silence was treated like obedience and difference like a threat. Her parents spoke of "normal" like it was a locked door and only certain children got the key. Liora learned how to lower her voice, hide her gestures, and fold herself so tightly that even her laughter sounded borrowed.</p>
+          <p class="quote">"Some days, pretending felt safer than breathing," she wrote in her diary at fourteen.</p>
+        </div>
+      </article>
+
+      <article class="chapter reveal reverse" data-emotion="pain">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 2 — Hallways, Laughter, and Bruises You Cannot Photograph</h2>
+          <p>School should have been a corridor to the future; for Liora, it became a daily trial. Whispers followed her like smoke. Boys mocked her walk. Girls repeated rumors, then apologized only when teachers looked their way. There were days when her backpack disappeared, days when slurs were scrawled on her locker, and days when she smiled through lunch because crying in public felt like handing out tickets to a show.</p>
+          <p>Even teachers who meant well often used the wrong name and told her not to "make life harder" for herself. In those small humiliations, she felt the world teaching her that pain would be her tuition fee for honesty.</p>
+          <p class="quote">She was not beaten every day, but she was made to feel breakable every day.</p>
+        </div>
+      </article>
+
+      <article class="chapter reveal" data-emotion="pain">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1507409613958-16eb9f9a5af5?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 3 — The Night Everything Cracked</h2>
+          <p>At sixteen, Liora came out to her parents at the dinner table with trembling hands and a page of carefully chosen words. Her mother cried. Her father stood, pushed back his chair, and called her a stranger in his house. He gathered her dresses from the closet, threw them into a black trash bag, and left them outside in the rain like a warning.</p>
+          <p>For months, home became a place of cold commands and emotional punishment: doors slammed, meals skipped "by accident," family photos moved so she no longer appeared in frames. The cruelty was often legal, often invisible, and always intimate.</p>
+          <p>That winter she slept in oversized hoodies, not for warmth but to disappear. Yet even then, she held one truth close: the hurt around her did not make her identity wrong. It only proved how frightened people become when asked to love what they do not understand.</p>
+        </div>
+      </article>
+
+      <article class="chapter reveal reverse" data-emotion="steady">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 4 — The First Hands That Helped Her Rise</h2>
+          <p>Support did not arrive as a miracle. It arrived as one counselor who listened. One librarian who set aside books about transgender lives. One classmate, Nadiya, who sat beside her in the cafeteria and stayed when others left. These were tiny acts to the world, but to Liora they were architecture: beams, nails, foundations.</p>
+          <p>She found an LGBTQ+ youth center two bus rides away. There, she learned new words—<em>affirmation, community, chosen family</em>—and each word felt like a window opening. She started therapy. She learned to answer cruelty with boundaries. She started documenting harassment and demanding accountability.</p>
+          <p class="quote">Resilience did not mean she never broke. It meant she learned how to heal in public without apologizing.</p>
+        </div>
+      </article>
+
+      <article class="chapter reveal" data-emotion="hopeful">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 5 — A Life Lived in Her Own Light</h2>
+          <p>By twenty-four, Liora had built a life that looked impossible from those high-school hallways. She graduated from college, mentored younger trans teens, and spoke at local schools about dignity and safety. Some of the people who once mocked her now sent awkward messages of apology. Some family members never changed. Others slowly did.</p>
+          <p>Her mother eventually attended a support group for parents of trans children. Months later, she showed up at Liora's apartment with a box. Inside were the dresses rescued from that rain-soaked night, washed and folded. "I don't know how to fix all the years," her mother said, voice shaking, "but I want to learn how to love you correctly."</p>
+          <p>Liora cried, not because everything was healed, but because she finally understood this: her joy did not depend on unanimous approval. She had survived rejection, humiliation, and the sharp loneliness of being unseen—and still she chose tenderness, still she chose tomorrow, still she chose herself.</p>
+        </div>
+      </article>
+
+      <section class="timeline reveal" data-emotion="steady">
+        <h2>Her Journey at a Glance</h2>
+        <ul>
+          <li><strong>Age 14:</strong> Names herself privately and begins journaling.</li>
+          <li><strong>Age 16:</strong> Comes out at home and experiences severe rejection.</li>
+          <li><strong>Age 16–18:</strong> Endures peer bullying and social isolation at school.</li>
+          <li><strong>Age 17:</strong> Connects with a counselor and local LGBTQ+ youth center.</li>
+          <li><strong>Age 19:</strong> Leaves home, builds chosen family, and starts therapy consistently.</li>
+          <li><strong>Age 24:</strong> Graduates, mentors younger youth, and lives openly and safely.</li>
+        </ul>
+      </section>
     </section>
 
-    <article class="chapter reveal" data-emotion="gentle">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 1 — The Name She Whispered in the Dark</h2>
-        <p>Long before anyone else knew, Liora had already met herself. She found that version in mirrors she covered with steam, in notebook margins crowded with hearts and half-written poems, in the brief peace she felt when she said, very softly, <em>"I am your daughter."</em></p>
-        <p>At home, silence was treated like obedience and difference like a threat. Her parents spoke of "normal" like it was a locked door and only certain children got the key. Liora learned how to lower her voice, hide her gestures, and fold herself so tightly that even her laughter sounded borrowed.</p>
-        <p class="quote">"Some days, pretending felt safer than breathing," she wrote in her diary at fourteen.</p>
-      </div>
-    </article>
+    <section class="story-collection" id="journey-to-me-story" data-story-title="The Journey to Me — Kirstin TransGirl">
+      <section class="story-group reveal" id="journey-to-me" data-emotion="steady">
+        <h2 class="story-title">Story Two — The Journey to Me</h2>
+        <p class="story-author">By Kirstin TransGirl</p>
+        <p class="story-intro">A first-person memoir of identity, fear, faith, reconciliation, and the courage to finally live in truth.</p>
+        <div class="story-tools">
+          <button class="story-read-btn" data-story-id="journey-to-me-story" type="button">Listen to this story</button>
+        </div>
+      </section>
 
-    <article class="chapter reveal reverse" data-emotion="pain">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 2 — Hallways, Laughter, and Bruises You Cannot Photograph</h2>
-        <p>School should have been a corridor to the future; for Liora, it became a daily trial. Whispers followed her like smoke. Boys mocked her walk. Girls repeated rumors, then apologized only when teachers looked their way. There were days when her backpack disappeared, days when slurs were scrawled on her locker, and days when she smiled through lunch because crying in public felt like handing out tickets to a show.</p>
-        <p>Even teachers who meant well often used the wrong name and told her not to "make life harder" for herself. In those small humiliations, she felt the world teaching her that pain would be her tuition fee for honesty.</p>
-        <p class="quote">She was not beaten every day, but she was made to feel breakable every day.</p>
-      </div>
-    </article>
+      <article class="chapter reveal reverse" data-emotion="gentle">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 1 — Knowing Before I Had Words</h2>
+          <p>From the tender age of five, I felt profoundly different. I knew inside that I was a girl, even though I could not explain it. I felt trapped in a role that did not match my truth, and that mismatch pushed me away from people I might have loved as friends.</p>
+          <p>Shame and confusion sat beside me like constant shadows. I withdrew, avoided closeness, and lived like an outcast in my own life.</p>
+        </div>
+      </article>
 
-    <article class="chapter reveal" data-emotion="pain">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1507409613958-16eb9f9a5af5?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 3 — The Night Everything Cracked</h2>
-        <p>At sixteen, Liora came out to her parents at the dinner table with trembling hands and a page of carefully chosen words. Her mother cried. Her father stood, pushed back his chair, and called her a stranger in his house. He gathered her dresses from the closet, threw them into a black trash bag, and left them outside in the rain like a warning.</p>
-        <p>For months, home became a place of cold commands and emotional punishment: doors slammed, meals skipped "by accident," family photos moved so she no longer appeared in frames. The cruelty was often legal, often invisible, and always intimate.</p>
-        <p>That winter she slept in oversized hoodies, not for warmth but to disappear. Yet even then, she held one truth close: the hurt around her did not make her identity wrong. It only proved how frightened people become when asked to love what they do not understand.</p>
-      </div>
-    </article>
+      <article class="chapter reveal" data-emotion="pain">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1492447166138-50c3889fccb1?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 2 — Dysphoria, Silence, and Survival</h2>
+          <p>As I grew older, the pain became unbearable. I cried at night, begging to wake up in a body that felt like home. Every wrong name and pronoun cut deep. At eleven, I began secretly crossdressing, hoping it would calm the storm inside. When my family found out, the moment was awkward and painful, but over time conversation slowly opened space for understanding.</p>
+          <p>Puberty felt brutal. Each change to my body felt like another layer burying who I was. The disconnect grew heavier, and hope felt very far away.</p>
+        </div>
+      </article>
 
-    <article class="chapter reveal reverse" data-emotion="steady">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 4 — The First Hands That Helped Her Rise</h2>
-        <p>Support did not arrive as a miracle. It arrived as one counselor who listened. One librarian who set aside books about transgender lives. One classmate, Nadiya, who sat beside her in the cafeteria and stayed when others left. These were tiny acts to the world, but to Liora they were architecture: beams, nails, foundations.</p>
-        <p>She found an LGBTQ+ youth center two bus rides away. There, she learned new words—<em>affirmation, community, chosen family</em>—and each word felt like a window opening. She started therapy. She learned to answer cruelty with boundaries. She started documenting harassment and demanding accountability.</p>
-        <p class="quote">Resilience did not mean she never broke. It meant she learned how to heal in public without apologizing.</p>
-      </div>
-    </article>
+      <article class="chapter reveal reverse" data-emotion="pain">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 3 — Lost Years and a Breaking Point</h2>
+          <p>When my mom asked if I wanted to be a girl, I wanted to scream yes, but fear kept me silent. I struggled with dysphoria while doctors misread my pain and cycled me through medications that sometimes caused long-term side effects. Anxiety took over my adolescence and early adulthood: I could not get a driver's license, keep steady work, or make friends with confidence.</p>
+          <p>At nineteen, my mom and I became estranged. By twenty-three, despair nearly consumed me. After days without eating or drinking and thoughts of ending my life, I prayed—and something shifted. Faith returned. So did clarity.</p>
+        </div>
+      </article>
 
-    <article class="chapter reveal" data-emotion="hopeful">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 5 — A Life Lived in Her Own Light</h2>
-        <p>By twenty-four, Liora had built a life that looked impossible from those high-school hallways. She graduated from college, mentored younger trans teens, and spoke at local schools about dignity and safety. Some of the people who once mocked her now sent awkward messages of apology. Some family members never changed. Others slowly did.</p>
-        <p>Her mother eventually attended a support group for parents of trans children. Months later, she showed up at Liora's apartment with a box. Inside were the dresses rescued from that rain-soaked night, washed and folded. "I don't know how to fix all the years," her mother said, voice shaking, "but I want to learn how to love you correctly."</p>
-        <p>Liora cried, not because everything was healed, but because she finally understood this: her joy did not depend on unanimous approval. She had survived rejection, humiliation, and the sharp loneliness of being unseen—and still she chose tenderness, still she chose tomorrow, still she chose herself.</p>
-      </div>
-    </article>
+      <article class="chapter reveal" data-emotion="hopeful">
+        <div class="image" style="background-image: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="chapter-content">
+          <h2>Chapter 4 — Choosing Life, Choosing Myself</h2>
+          <p>Soon after, my mom reached out with an apology email and re-entered my life at exactly the right time. In April 2015, she took me out as a girl for the first time. It was liberating. I met another trans girl who offered guidance and hope. On August 8, 2015, I made the decision to stop hiding and live openly as myself.</p>
+          <p>In June 2020, after a long road and expanded Wisconsin Medicaid coverage for gender-affirming surgery, I underwent SRS. That alignment brought profound peace. With confidence growing, I pursued milestones I once thought impossible: working on my driver's license, getting a job, and enrolling in college.</p>
+        </div>
+      </article>
 
-    <section class="timeline reveal" data-emotion="steady">
-      <h2>Her Journey at a Glance</h2>
-      <ul>
-        <li><strong>Age 14:</strong> Names herself privately and begins journaling.</li>
-        <li><strong>Age 16:</strong> Comes out at home and experiences severe rejection.</li>
-        <li><strong>Age 16–18:</strong> Endures peer bullying and social isolation at school.</li>
-        <li><strong>Age 17:</strong> Connects with a counselor and local LGBTQ+ youth center.</li>
-        <li><strong>Age 19:</strong> Leaves home, builds chosen family, and starts therapy consistently.</li>
-        <li><strong>Age 24:</strong> Graduates, mentors younger youth, and lives openly and safely.</li>
-      </ul>
-    </section>
-
-    <section class="story-group reveal" id="journey-to-me" data-emotion="steady">
-      <h2 class="story-title">Story Two — The Journey to Me</h2>
-      <p class="story-author">By Kirstin TransGirl</p>
-      <p class="story-intro">A first-person memoir of identity, fear, faith, reconciliation, and the courage to finally live in truth.</p>
-    </section>
-
-    <article class="chapter reveal reverse" data-emotion="gentle">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 1 — Knowing Before I Had Words</h2>
-        <p>From the tender age of five, I felt profoundly different. I knew inside that I was a girl, even though I could not explain it. I felt trapped in a role that did not match my truth, and that mismatch pushed me away from people I might have loved as friends.</p>
-        <p>Shame and confusion sat beside me like constant shadows. I withdrew, avoided closeness, and lived like an outcast in my own life.</p>
-      </div>
-    </article>
-
-    <article class="chapter reveal" data-emotion="pain">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1492447166138-50c3889fccb1?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 2 — Dysphoria, Silence, and Survival</h2>
-        <p>As I grew older, the pain became unbearable. I cried at night, begging to wake up in a body that felt like home. Every wrong name and pronoun cut deep. At eleven, I began secretly crossdressing, hoping it would calm the storm inside. When my family found out, the moment was awkward and painful, but over time conversation slowly opened space for understanding.</p>
-        <p>Puberty felt brutal. Each change to my body felt like another layer burying who I was. The disconnect grew heavier, and hope felt very far away.</p>
-      </div>
-    </article>
-
-    <article class="chapter reveal reverse" data-emotion="pain">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 3 — Lost Years and a Breaking Point</h2>
-        <p>When my mom asked if I wanted to be a girl, I wanted to scream yes, but fear kept me silent. I struggled with dysphoria while doctors misread my pain and cycled me through medications that sometimes caused long-term side effects. Anxiety took over my adolescence and early adulthood: I could not get a driver's license, keep steady work, or make friends with confidence.</p>
-        <p>At nineteen, my mom and I became estranged. By twenty-three, despair nearly consumed me. After days without eating or drinking and thoughts of ending my life, I prayed—and something shifted. Faith returned. So did clarity.</p>
-      </div>
-    </article>
-
-    <article class="chapter reveal" data-emotion="hopeful">
-      <div class="image" style="background-image: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="chapter-content">
-        <h2>Chapter 4 — Choosing Life, Choosing Myself</h2>
-        <p>Soon after, my mom reached out with an apology email and re-entered my life at exactly the right time. In April 2015, she took me out as a girl for the first time. It was liberating. I met another trans girl who offered guidance and hope. On August 8, 2015, I made the decision to stop hiding and live openly as myself.</p>
-        <p>In June 2020, after a long road and expanded Wisconsin Medicaid coverage for gender-affirming surgery, I underwent SRS. That alignment brought profound peace. With confidence growing, I pursued milestones I once thought impossible: working on my driver's license, getting a job, and enrolling in college.</p>
-      </div>
-    </article>
-
-    <section class="timeline reveal" data-emotion="hopeful">
-      <h2>Kirstin's Milestones</h2>
-      <ul>
-        <li><strong>Age 5:</strong> First deep awareness of being a girl.</li>
-        <li><strong>Age 11:</strong> Secretly explores gender expression.</li>
-        <li><strong>Age 19:</strong> Estrangement from mom; emotional isolation deepens.</li>
-        <li><strong>Age 23:</strong> Turning point of faith, clarity, and commitment to transition.</li>
-        <li><strong>April 2015:</strong> First public day out as herself with her mom.</li>
-        <li><strong>August 8, 2015:</strong> Chooses to live openly full-time.</li>
-        <li><strong>June 2020:</strong> Undergoes SRS, gains major relief and confidence.</li>
-      </ul>
-      <p class="note">Today she celebrates her journey each year with joy, freedom, and gratitude—a reminder that authenticity can transform a life.</p>
+      <section class="timeline reveal" data-emotion="hopeful">
+        <h2>Kirstin's Milestones</h2>
+        <ul>
+          <li><strong>Age 5:</strong> First deep awareness of being a girl.</li>
+          <li><strong>Age 11:</strong> Secretly explores gender expression.</li>
+          <li><strong>Age 19:</strong> Estrangement from mom; emotional isolation deepens.</li>
+          <li><strong>Age 23:</strong> Turning point of faith, clarity, and commitment to transition.</li>
+          <li><strong>April 2015:</strong> First public day out as herself with her mom.</li>
+          <li><strong>August 8, 2015:</strong> Chooses to live openly full-time.</li>
+          <li><strong>June 2020:</strong> Undergoes SRS, gains major relief and confidence.</li>
+        </ul>
+        <p class="note">Today she celebrates her journey each year with joy, freedom, and gratitude—a reminder that authenticity can transform a life.</p>
+      </section>
     </section>
   </main>
 

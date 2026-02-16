@@ -3,6 +3,7 @@ const typedLine = document.getElementById("typedLine");
 const progress = document.getElementById("readProgress");
 const revealItems = document.querySelectorAll(".reveal");
 
+const storyTarget = document.getElementById("storyTarget");
 const startReading = document.getElementById("startReading");
 const pauseReading = document.getElementById("pauseReading");
 const resumeReading = document.getElementById("resumeReading");
@@ -11,6 +12,7 @@ const rateControl = document.getElementById("rateControl");
 const voiceSelect = document.getElementById("voiceSelect");
 const readerStatus = document.getElementById("readerStatus");
 const storyRoot = document.getElementById("storyRoot");
+const storyReadButtons = document.querySelectorAll(".story-read-btn");
 
 let index = 0;
 let isStopped = false;
@@ -50,8 +52,20 @@ const observer = new IntersectionObserver(
   { threshold: 0.18 }
 );
 
-function getStorySegments() {
-  const segmentNodes = storyRoot.querySelectorAll(".story-group, .chapter, .timeline");
+function getTargetStoryContainer() {
+  if (storyTarget.value === "all-stories") {
+    return storyRoot;
+  }
+
+  return document.getElementById(storyTarget.value);
+}
+
+function getStorySegments(container) {
+  if (!container) {
+    return [];
+  }
+
+  const segmentNodes = container.querySelectorAll(".story-group, .chapter, .timeline");
   const segments = [];
 
   segmentNodes.forEach((node) => {
@@ -71,6 +85,15 @@ function getStorySegments() {
   });
 
   return segments;
+}
+
+function getTargetLabel() {
+  if (storyTarget.value === "all-stories") {
+    return "All stories";
+  }
+
+  const container = document.getElementById(storyTarget.value);
+  return container?.dataset.storyTitle || "Selected story";
 }
 
 function fillVoiceList() {
@@ -106,12 +129,12 @@ function createUtterance(segment, idx, total) {
   utterance.volume = 1;
 
   utterance.onstart = () => {
-    readerStatus.textContent = `Reading ${idx + 1} of ${total}…`;
+    readerStatus.textContent = `Reading ${idx + 1} of ${total} from ${getTargetLabel()}…`;
   };
 
   utterance.onend = () => {
     if (idx === total - 1 && !isStopped) {
-      readerStatus.textContent = "Finished reading the selected stories.";
+      readerStatus.textContent = `Finished reading ${getTargetLabel()}.`;
     }
   };
 
@@ -130,14 +153,16 @@ function startStoryReading() {
 
   window.speechSynthesis.cancel();
   isStopped = false;
-  const segments = getStorySegments();
+
+  const targetContainer = getTargetStoryContainer();
+  const segments = getStorySegments(targetContainer);
 
   if (segments.length === 0) {
-    readerStatus.textContent = "No readable story text found.";
+    readerStatus.textContent = "No readable story text found for this selection.";
     return;
   }
 
-  readerStatus.textContent = "Starting narration…";
+  readerStatus.textContent = `Starting ${getTargetLabel()}…`;
   segments.forEach((segment, idx) => {
     window.speechSynthesis.speak(createUtterance(segment, idx, segments.length));
   });
@@ -159,6 +184,16 @@ resumeReading.addEventListener("click", () => {
   readerStatus.textContent = "Reading resumed.";
 });
 stopReading.addEventListener("click", stopStoryReading);
+
+storyReadButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const storyId = button.dataset.storyId;
+    if (storyId) {
+      storyTarget.value = storyId;
+      startStoryReading();
+    }
+  });
+});
 
 revealItems.forEach((item) => observer.observe(item));
 window.addEventListener("scroll", updateProgress, { passive: true });

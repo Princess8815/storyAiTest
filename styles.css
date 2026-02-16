@@ -218,7 +218,19 @@ footer {
 .container {
   margin: 2.3rem auto 5rem;
   display: grid;
+  gap: 2rem;
+}
+
+.story-collection {
+  display: grid;
   gap: 1.4rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.story-collection:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .story-group {
@@ -243,6 +255,24 @@ footer {
 
 .story-intro {
   color: #ddd7f9;
+}
+
+.story-tools {
+  margin-top: 0.8rem;
+}
+
+.story-read-btn {
+  border-radius: 10px;
+  border: 1px solid rgba(114, 226, 255, 0.65);
+  background: rgba(114, 226, 255, 0.14);
+  color: #def8ff;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.story-read-btn:hover {
+  background: rgba(114, 226, 255, 0.24);
 }
 
 .chapter {
