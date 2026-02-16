@@ -4,260 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Still Blooming — A Story of Survival and Joy</title>
-  <style>
-    :root {
-      --bg: #0f1020;
-      --card: #171931;
-      --text: #f5f4ff;
-      --muted: #c7c2e8;
-      --accent: #72e2ff;
-      --rose: #ff8bb8;
-      --violet: #aa8dff;
-      --danger: #ff6d80;
-      --good: #99f0a0;
-      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body {
-      scroll-behavior: smooth;
-      background: radial-gradient(circle at 15% 0%, #261f49 0, var(--bg) 55%);
-      color: var(--text);
-      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-      line-height: 1.7;
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .progress {
-      position: fixed;
-      inset: 0 0 auto 0;
-      height: 5px;
-      background: linear-gradient(90deg, var(--rose), var(--accent));
-      transform-origin: left;
-      transform: scaleX(0);
-      z-index: 30;
-    }
-
-    header {
-      position: relative;
-      min-height: 92vh;
-      display: grid;
-      align-items: center;
-      padding: 4rem 1.4rem 2rem;
-      isolation: isolate;
-    }
-
-    header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(15, 16, 32, 0.3), rgba(15, 16, 32, 0.8)),
-        url("https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1600&q=80") center/cover;
-      filter: saturate(0.8) brightness(0.75);
-      z-index: -2;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(140deg, rgba(255, 139, 184, 0.28), rgba(114, 226, 255, 0.2));
-      z-index: -1;
-    }
-
-    .hero {
-      width: min(1050px, 100%);
-      margin: 0 auto;
-      padding: clamp(1rem, 2vw, 2rem);
-    }
-
-    .kicker {
-      font-size: 0.84rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #eedcff;
-      margin-bottom: 0.8rem;
-    }
-
-    h1 {
-      font-family: "Georgia", "Times New Roman", serif;
-      line-height: 1.16;
-      font-size: clamp(2.1rem, 5vw, 4.15rem);
-      max-width: 15ch;
-      text-wrap: balance;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      margin-bottom: 1.2rem;
-    }
-
-    .subtitle {
-      max-width: 60ch;
-      color: #f0ebff;
-      font-size: clamp(1rem, 1.8vw, 1.25rem);
-      background: rgba(10, 10, 20, 0.38);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 14px;
-      padding: 0.9rem 1.1rem;
-      backdrop-filter: blur(2px);
-    }
-
-    .trigger {
-      margin-top: 1.2rem;
-      display: inline-block;
-      color: var(--muted);
-      border: 1px dashed rgba(255, 255, 255, 0.38);
-      border-radius: 999px;
-      padding: 0.35rem 0.8rem;
-      font-size: 0.85rem;
-    }
-
-    .container {
-      width: min(1100px, 92%);
-      margin: 2.3rem auto 5rem;
-      display: grid;
-      gap: 1.4rem;
-    }
-
-    .chapter {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-      background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-
-    .chapter.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .image {
-      min-height: 250px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      isolation: isolate;
-    }
-
-    .image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.65));
-      z-index: -1;
-    }
-
-    .chapter-content {
-      padding: 1.2rem 1.2rem 1.4rem;
-    }
-
-    h2 {
-      font-family: "Georgia", serif;
-      font-size: clamp(1.45rem, 2.8vw, 2.1rem);
-      margin-bottom: 0.5rem;
-    }
-
-    p + p {
-      margin-top: 0.95rem;
-    }
-
-    .quote {
-      margin-top: 1rem;
-      border-left: 4px solid var(--rose);
-      padding: 0.6rem 0.9rem;
-      background: rgba(255, 139, 184, 0.08);
-      color: #ffeef6;
-      border-radius: 8px;
-    }
-
-    .timeline {
-      padding: 1.4rem;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: var(--card);
-      box-shadow: var(--shadow);
-    }
-
-    .timeline h2 {
-      margin-bottom: 0.9rem;
-    }
-
-    .timeline ul {
-      list-style: none;
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .timeline li {
-      padding: 0.7rem 0.85rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .timeline strong {
-      color: var(--accent);
-    }
-
-    .note {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      color: #d4d0ee;
-    }
-
-    footer {
-      width: min(1100px, 92%);
-      margin: 0 auto 3rem;
-      text-align: center;
-      color: #ddd9f6;
-      opacity: 0.95;
-      border-top: 1px solid rgba(255, 255, 255, 0.14);
-      padding-top: 1.2rem;
-    }
-
-    .support {
-      margin-top: 0.8rem;
-      font-size: 0.95rem;
-      color: #d0f7d5;
-    }
-
-    @media (min-width: 850px) {
-      .chapter {
-        grid-template-columns: 1fr 1.1fr;
-      }
-
-      .chapter.reverse {
-        grid-template-columns: 1.1fr 1fr;
-      }
-
-      .chapter.reverse .image {
-        order: 2;
-      }
-
-      .chapter.reverse .chapter-content {
-        order: 1;
-      }
-
-      .chapter-content {
-        padding: 1.6rem 1.7rem 1.8rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="progress" id="readProgress" aria-hidden="true"></div>
@@ -271,8 +18,32 @@
     </div>
   </header>
 
-  <main class="container">
-    <article class="chapter reveal">
+  <section class="audio-reader" aria-label="Audio story reader">
+    <div class="audio-left">
+      <h2>Audio Reader</h2>
+      <p>
+        Prefer to listen? Use the reader below. It changes pace and tone through difficult and hopeful moments to better match the story's emotions.
+      </p>
+    </div>
+    <div class="audio-controls">
+      <button id="startReading" type="button">▶ Read Story</button>
+      <button id="pauseReading" type="button">⏸ Pause</button>
+      <button id="resumeReading" type="button">⏵ Resume</button>
+      <button id="stopReading" type="button">■ Stop</button>
+      <label>
+        Speed
+        <input id="rateControl" type="range" min="0.8" max="1.25" step="0.05" value="1" />
+      </label>
+      <label>
+        Voice
+        <select id="voiceSelect" aria-label="Voice selector"></select>
+      </label>
+      <p id="readerStatus" class="reader-status">Ready to read.</p>
+    </div>
+  </section>
+
+  <main class="container" id="storyRoot">
+    <article class="chapter reveal" data-emotion="gentle">
       <div class="image" style="background-image: url('https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?auto=format&fit=crop&w=1200&q=80');"></div>
       <div class="chapter-content">
         <h2>Chapter 1 — The Name She Whispered in the Dark</h2>
@@ -282,7 +53,7 @@
       </div>
     </article>
 
-    <article class="chapter reveal reverse">
+    <article class="chapter reveal reverse" data-emotion="pain">
       <div class="image" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80');"></div>
       <div class="chapter-content">
         <h2>Chapter 2 — Hallways, Laughter, and Bruises You Cannot Photograph</h2>
@@ -292,7 +63,7 @@
       </div>
     </article>
 
-    <article class="chapter reveal">
+    <article class="chapter reveal" data-emotion="pain">
       <div class="image" style="background-image: url('https://images.unsplash.com/photo-1507409613958-16eb9f9a5af5?auto=format&fit=crop&w=1200&q=80');"></div>
       <div class="chapter-content">
         <h2>Chapter 3 — The Night Everything Cracked</h2>
@@ -302,7 +73,7 @@
       </div>
     </article>
 
-    <article class="chapter reveal reverse">
+    <article class="chapter reveal reverse" data-emotion="steady">
       <div class="image" style="background-image: url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80');"></div>
       <div class="chapter-content">
         <h2>Chapter 4 — The First Hands That Helped Her Rise</h2>
@@ -312,7 +83,7 @@
       </div>
     </article>
 
-    <article class="chapter reveal">
+    <article class="chapter reveal" data-emotion="hopeful">
       <div class="image" style="background-image: url('https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1200&q=80');"></div>
       <div class="chapter-content">
         <h2>Chapter 5 — A Life Lived in Her Own Light</h2>
@@ -322,7 +93,7 @@
       </div>
     </article>
 
-    <section class="timeline reveal">
+    <section class="timeline reveal" data-emotion="steady">
       <h2>Her Journey at a Glance</h2>
       <ul>
         <li><strong>Age 14:</strong> Names herself privately and begins journaling.</li>
@@ -341,46 +112,6 @@
     <p class="support">If you need support, seek local LGBTQ+ organizations, trusted counselors, or crisis resources in your region.</p>
   </footer>
 
-  <script>
-    const subtitle = "Liora's story is one of heartbreak, rejection, and abuse—but also of extraordinary courage, community, and the right to live authentically.";
-    const typedLine = document.getElementById("typedLine");
-    const progress = document.getElementById("readProgress");
-    const revealItems = document.querySelectorAll(".reveal");
-
-    let index = 0;
-    function typeText() {
-      if (index <= subtitle.length) {
-        typedLine.textContent = subtitle.slice(0, index);
-        index += 1;
-        setTimeout(typeText, 22);
-      }
-    }
-
-    function updateProgress() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
-      progress.style.transform = `scaleX(${Math.min(Math.max(ratio, 0), 1)})`;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.18 }
-    );
-
-    revealItems.forEach((item) => observer.observe(item));
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-
-    typeText();
-    updateProgress();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

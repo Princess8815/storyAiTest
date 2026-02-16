@@ -1,0 +1,314 @@
+:root {
+  --bg: #0f1020;
+  --card: #171931;
+  --text: #f5f4ff;
+  --muted: #c7c2e8;
+  --accent: #72e2ff;
+  --rose: #ff8bb8;
+  --violet: #aa8dff;
+  --danger: #ff6d80;
+  --good: #99f0a0;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  background: radial-gradient(circle at 15% 0%, #261f49 0, var(--bg) 55%);
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--rose), var(--accent));
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 30;
+}
+
+header {
+  position: relative;
+  min-height: 92vh;
+  display: grid;
+  align-items: center;
+  padding: 4rem 1.4rem 2rem;
+  isolation: isolate;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15, 16, 32, 0.3), rgba(15, 16, 32, 0.8)),
+    url("https://images.unsplash.com/photo-1516589091380-5d8e87df6995?auto=format&fit=crop&w=1600&q=80") center/cover;
+  filter: saturate(0.8) brightness(0.75);
+  z-index: -2;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(255, 139, 184, 0.28), rgba(114, 226, 255, 0.2));
+  z-index: -1;
+}
+
+.hero {
+  width: min(1050px, 100%);
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 2rem);
+}
+
+.kicker {
+  font-size: 0.84rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #eedcff;
+  margin-bottom: 0.8rem;
+}
+
+h1 {
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.16;
+  font-size: clamp(2.1rem, 5vw, 4.15rem);
+  max-width: 15ch;
+  text-wrap: balance;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.2rem;
+}
+
+.subtitle {
+  max-width: 60ch;
+  color: #f0ebff;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  background: rgba(10, 10, 20, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  backdrop-filter: blur(2px);
+}
+
+.trigger {
+  margin-top: 1.2rem;
+  display: inline-block;
+  color: var(--muted);
+  border: 1px dashed rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.audio-reader {
+  width: min(1100px, 92%);
+  margin: 1.2rem auto 0;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1rem;
+}
+
+.audio-left h2 {
+  margin-bottom: 0.35rem;
+}
+
+.audio-controls {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.audio-controls button,
+.audio-controls select,
+.audio-controls input {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  padding: 0.5rem 0.6rem;
+}
+
+.audio-controls button {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.audio-controls button:hover {
+  border-color: var(--accent);
+}
+
+.audio-controls label {
+  font-size: 0.95rem;
+  color: var(--muted);
+  display: grid;
+  gap: 0.25rem;
+}
+
+.reader-status {
+  margin-top: 0.25rem;
+  color: #d4d0ee;
+  font-size: 0.9rem;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 2.3rem auto 5rem;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.chapter {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.chapter.visible,
+.timeline.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.image {
+  min-height: 250px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  isolation: isolate;
+}
+
+.image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.65));
+  z-index: -1;
+}
+
+.chapter-content {
+  padding: 1.2rem 1.2rem 1.4rem;
+}
+
+h2 {
+  font-family: "Georgia", serif;
+  font-size: clamp(1.45rem, 2.8vw, 2.1rem);
+  margin-bottom: 0.5rem;
+}
+
+p + p {
+  margin-top: 0.95rem;
+}
+
+.quote {
+  margin-top: 1rem;
+  border-left: 4px solid var(--rose);
+  padding: 0.6rem 0.9rem;
+  background: rgba(255, 139, 184, 0.08);
+  color: #ffeef6;
+  border-radius: 8px;
+}
+
+.timeline {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  padding: 1.4rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.timeline h2 {
+  margin-bottom: 0.9rem;
+}
+
+.timeline ul {
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.timeline li {
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.timeline strong {
+  color: var(--accent);
+}
+
+.note {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #d4d0ee;
+}
+
+footer {
+  width: min(1100px, 92%);
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: #ddd9f6;
+  opacity: 0.95;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 1.2rem;
+}
+
+.support {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  color: #d0f7d5;
+}
+
+@media (min-width: 850px) {
+  .audio-reader {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: start;
+  }
+
+  .chapter {
+    grid-template-columns: 1fr 1.1fr;
+  }
+
+  .chapter.reverse {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .chapter.reverse .image {
+    order: 2;
+  }
+
+  .chapter.reverse .chapter-content {
+    order: 1;
+  }
+
+  .chapter-content {
+    padding: 1.6rem 1.7rem 1.8rem;
+  }
+}
